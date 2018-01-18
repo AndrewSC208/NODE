@@ -6,7 +6,6 @@ let app = express();
 // setup middleware:
 hbs.registerPartials(__dirname + '/views/partials');
 app.set('view engine', 'hbs');
-app.use(express.static(__dirname + '/public'));
 // custome middleware:
 app.use((req, res, next) => {
     const now = new Date().toString();
@@ -21,6 +20,12 @@ app.use((req, res, next) => {
     
     next();
 });
+// middleware that does not have the next call. Will block the remaing code in the system:
+// app.use((req, res, next) => {
+//     res.render('maintanence.hbs');
+// });
+
+app.use(express.static(__dirname + '/public'));
 
 // register an hbs helper:
 hbs.registerHelper('getCurrentYear', () => {
