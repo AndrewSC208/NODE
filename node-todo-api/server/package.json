@@ -1,0 +1,38 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "yarn server:dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server:dev": "nodemon --exec npm run babel-node",
+    "babel-node": "babel-node index.js --presets es2015,stage-2",
+    "server:build": "babel ./server/src -d ./server/dist --presets babe-preset-latest",
+    "server:run": "node ./server/dist/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "ajv-keywords": "^2.1.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.15.4",
+    "helmet": "^3.8.1",
+    "http": "0.0.0",
+    "morgan": "^1.8.2",
+    "path": "^0.12.7",
+    "response-time": "^2.3.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "nodemon": "^1.12.1",
+    "webpack": "^3.6.0"
+  }
+}
