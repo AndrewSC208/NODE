@@ -7,3 +7,5 @@ Promise: When you order something at a McDonals, and you receive a recipt with a
 Generators: Have locally pausable stacks. A function that can pause within itself.
 
 Events ( +promises):
+
+
