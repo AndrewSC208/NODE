@@ -10,7 +10,7 @@ COPY package.json /usr/src/app/
 # Bundle app source
 COPY . /usr/src/app
 
-EXPOSE ${PORT}
+EXPOSE 4112
 
 # Lets see if yarn runs
 ENTRYPOINT  yarn install; \

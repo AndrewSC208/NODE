@@ -4,10 +4,10 @@
 import path from 'path';
 
 const Config = {
-    PORT: process.env.PORT || 9001,
+    PORT: process.env.PORT || 4112,
     LOGGER_TYPE: 'short',
     PUBLIC_PATH: path.resolve(__dirname, './public'),
-    mongo: {
+    DB: {
         MONGO_URL: 'localhost',
         MONGO_PORT: 27017,
     }

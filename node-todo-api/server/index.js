@@ -6,34 +6,45 @@ import helmet from 'helmet';
 import cookieParser from 'cookie-parser';
 import responseTime from 'response-time';
 import bodyParser from 'body-parser';
-import Config from './config/server.config';
+import mongoose from './config/mongoose';
+
+import Config from './config/server';
+import { Todo } from './api/todo';
 /*
- * Set express app:
+ * START EXPRESS:
  */
 const app = express();
 /*
- * CONFIG EXPRESS GLOBALS:
+ * CONFIG EXPRESS GLOBALS & MIDDLEWARE:
  */
-// looger config:
-app.use(logger(Config.LOGGER_TYPE));
-// set public path:
 app.use(express.static(Config.PUBLIC_PATH));
-// set up helmet:
+app.use(logger(Config.LOGGER_TYPE));
 app.use(helmet());
-// cookie parser:
 app.use(cookieParser());
-// set up response time:
 app.use(responseTime());
-// parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
-// parse application/json
 app.use(bodyParser.json());
 /*
- * CUSTOM MIDDLEWARE:
+ * ROUTES:
  */
+app.post('/todos', (req, res) => {
+    const todo = new Todo({
+        text: req.body.text
+    });
+
+    todo.save().then((data) => {
+        res.send(data);
+    }, (e) => {
+        res.status(400).send(e);
+    });
+});
 /*
  * START SERVER:
  */
 http.createServer(app).listen(Config.PORT, () => {
     console.log(`Server is running on: ${Config.PORT}`)
 });
+
+export default {
+    app
+};

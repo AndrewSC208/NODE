@@ -4,12 +4,14 @@ services:
   mongo:
     build:
       context: ./data
-      dockerfile: Dockerfile.mongo.dev
+      dockerfile: dockerfile.mongo.dev
+    ports:
+      - 27017:27017
 
   server:
     build:
       context: ./server
-      dockerfile: Dockerfile.node.dev
+      dockerfile: dockerfile.node.dev
     environment:
       - NODE_ENV=development
     env_file:
@@ -17,7 +19,7 @@ services:
     volumes:
       - ./server:/usr/src/app
     ports:
-      - "${PORT}:${PORT}"
+      - 4112:4112
     depends_on:
       - mongo
     links:
