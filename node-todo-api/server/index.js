@@ -27,6 +27,10 @@ app.use(bodyParser.json());
 /*
  * ROUTES:
  */
+/*
+    TODO: MOVE THESE TO ROUTES
+*/
+// create todo:
 app.post('/todos', (req, res) => {
     const todo = new Todo({
         text: req.body.text
@@ -38,6 +42,18 @@ app.post('/todos', (req, res) => {
         res.status(400).send(e);
     });
 });
+// get all todos:
+app.get('/todos', (req, res) => {
+    Todo.find().then((data) => {
+        res.send({
+            data
+        });
+    }, (e) => {
+        res.status(400).send(e);
+    })
+});
+// mogoose quries:
+
 /*
  * START SERVER:
  */

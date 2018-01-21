@@ -4,8 +4,19 @@ import request from 'supertest';
 import app from '../index';
 import { Todo } from '../api/todo';
 
+const seed = [
+    {
+        text: 'Seeds data'
+    },
+    {
+        text: 'Second test'
+    }
+]
+
 beforeEach((done) => {
-    Todo.remove({}).then(() => done());
+    Todo.remove({}).then(() => {
+        return Todo.insertMany(seed);
+    }).then(() => done());
 });
 
 describe('POST /todos', () => {
@@ -24,8 +35,8 @@ describe('POST /todos', () => {
                     return done(err);
                 }
 
-                Todo.find().then((todos) => {
-                    expect(todos.length).toBe(1);
+                Todo.find({text}).then((todos) => {
+                    expect(todos.length).toBe(2);
                     expect(todos[0].text).toBe(text);
                     done();
                 }).catch((e) => done(e));
@@ -47,5 +58,17 @@ describe('POST /todos', () => {
                     done();
                 }).catch((e) => done(e));
             });
+    });
+});
+
+describe('GET /todos', () => {
+    it('should get all todos', (done) => {
+        request(app)
+            .get('/todos')
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.todos.length).toBo(2);
+            })
+            .end(done);
     });
 });
