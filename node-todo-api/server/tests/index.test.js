@@ -3,12 +3,15 @@ import request from 'supertest';
 
 import app from '../index';
 import { Todo } from '../api/todo';
+import { ObjectID, ObjectId } from '../../../../../../Library/Caches/typescript/2.6/node_modules/@types/bson';
 
 const seed = [
     {
+        _id: new ObjectID(),
         text: 'Seeds data'
     },
     {
+        _id: new ObjectID(),
         text: 'Second test'
     }
 ]
@@ -69,6 +72,35 @@ describe('GET /todos', () => {
             .expect((res) => {
                 expect(res.body.todos.length).toBo(2);
             })
+            .end(done);
+    });
+});
+
+describe('GET /todos/:id', () => {
+    // valid call:
+    it('should return todo doc', (done) => {
+        request(app)
+            .get(`/todos/${todos[0]._id.toHexString()}`)
+            .expect(200)
+            .expect((res) => {
+                expect(res.body.todo.text).toBe(todos[0].text);
+            })
+            .end(done);
+    }); 
+
+    it('should return 404 if todo not found', (done) => {
+        // get a 404
+        request(app)
+            .get(`/todos/${ObjectID.toHexString()}`)
+            .expect(404)
+            .end(done);
+    });
+
+    it('should return 404 for non objectIds', (done) => {
+        // get a 404
+        request(app)
+            .get(`/todos/23434`)
+            .expect(404)
             .end(done);
     });
 });
