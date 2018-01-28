@@ -50,6 +50,27 @@ UserSchema.methods.generateAuthTokens = function() {
     });
 }
 
+// model methods get called as model with the this binding.
+UserSchema.statics.findByToken = function(token) {
+    let User = this;
+    let decoded;
+
+    try {
+        decoded = jwt.verify(token, 'abc123');
+    } catch (e) {
+        return Promise.reject({
+            error_code: 401,
+            error_msg: 'Authentication Token Failed'
+        })
+    }
+
+    return User.findOne({
+        '_id': decoded._id,
+        'tokens.token': token,
+        'tokens.access': 'auth'
+    });
+}
+
 const User = mongoose.model('User', UserSchema);
 
 export default User;

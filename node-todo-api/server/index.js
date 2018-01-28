@@ -9,10 +9,19 @@ import bodyParser from 'body-parser';
 import mongoose from './config/mongoose';
 import { ObjectId } from 'mongodb';
 import _ from 'lodash';
-
+/*
+ *  UTILITIES
+ */
 import Config from './config/server';
+/*
+ *  DB MODELS
+ */
 import { Todo } from './api/todo';
 import { User } from './api/user';
+/*
+ *  CUSTOM MIDDLEWARE
+ */
+import authenticate from './middleware/authenticate';
 /*
  * START EXPRESS:
  */
@@ -165,7 +174,6 @@ app.patch('/todos/:id', (req, res) => {
 });
 
 // POST /user
-
 app.post('/users', (req, res) => {
     const body = _.pick(req.body, ['email', 'password'])
     const user = new User(body);
@@ -177,6 +185,11 @@ app.post('/users', (req, res) => {
     }).catch((e) => {
         console.log(e);
     });
+});
+
+// POST /users/me
+app.post('/users/me', authenticate, (req, res) => {
+    res.send(req.user);
 });
 
 /*
