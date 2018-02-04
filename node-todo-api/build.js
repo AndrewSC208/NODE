@@ -1,4 +1,5 @@
 const fs = require('fs');
+const { exec } = require('child_process');
 /*
     steps for automatic building client app, and server
 
@@ -6,13 +7,21 @@ const fs = require('fs');
     2. move /client/build to public folder
     3. Somehow register index.html on index.hbs?
 */
-
+/*
+ *  RUN THE CLIENT BUILD SCRIPT IN CREATE REACT SCRIPTS
+ */
 const compileClient = () => {
     return new Promise((resolve, reject) => {
-
+        // exec('', (err, stdout, stderr) => {
+        //     if (err) {
+        //         // node couldn't execute the command
+        //         return;
+        //     }
     });
 };
-
+/*
+ *  MOVE CLIENT BUNDLE SERVER PUBLIC SERVER  DIR FOR DEPLOYMENT
+ */
 const moveFolder = () => {
     return new Promise((resolve, reject) => {
 

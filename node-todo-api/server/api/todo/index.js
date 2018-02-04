@@ -1,5 +1,3 @@
-import Todo from './model';
+import Todos from './routes';
 
-export {
-    Todo
-};
+export default Todos;

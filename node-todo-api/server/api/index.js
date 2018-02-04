@@ -1,8 +1,13 @@
 import express from 'express';
 
-const router = express.Router();
+import Users from './user';
+import Todos from './todo';
+import Workouts from './workout';
 
-router.use('/user', user);
-router.use('/todo', todo);
+const Api = express.Router();
 
-export default router;
+Api.use('/users', Users);
+Api.use('/todos', Todos);
+Api.use('/workouts', Workouts);
+
+export default Api;

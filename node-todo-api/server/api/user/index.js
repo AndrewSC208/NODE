@@ -1,5 +1,3 @@
-import User from './model';
+import Users from './routes';
 
-export {
-    User
-}
+export default Users;

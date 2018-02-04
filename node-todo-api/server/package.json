@@ -17,6 +17,7 @@
   "license": "ISC",
   "dependencies": {
     "ajv-keywords": "^2.1.0",
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
     "crypto-js": "^3.1.9-1",

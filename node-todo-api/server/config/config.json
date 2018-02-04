@@ -1,0 +1,12 @@
+{
+    "test": {
+        "PORT": 4112,
+        "MONGOOSE_CONNECTION_STRING": "mongodb://mongo:27017/TodoApp",
+        "JWT_SECRET": "sdjklegnjkwnvinwklnklnviowvndkjvnwo"
+    },
+    "development": {
+        "PORT": 4112,
+        "MONGOOSE_CONNECTION_STRING": "mongodb://mongo:27017/TodoApp",
+        "JWT_SECRET": "djkwnkjnwriugn'lskcmklsjdbngwndinsnckwjnfdi"
+    }
+}
